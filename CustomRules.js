@@ -295,6 +295,9 @@ class Handlers
     static function st(status:String){//print msg on status.
         FiddlerObject.StatusText=status;
         }
+    static function alert(content:String){
+        FiddlerObject.alert(content);		
+    }
 	static function OnBeforeResponse(oSession: Session) {
         if (m_Hide304s && oSession.responseCode == 304) {
             oSession["ui-hide"] = "true";
@@ -502,4 +505,5 @@ class Handlers
         }
     }
 }
+
 
