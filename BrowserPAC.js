@@ -3,5 +3,5 @@
 // Get the URL to this file from Fiddler by clicking Tools > Options > Connections > Copy Browser Proxy Configuration URL.
 
 function FindProxyForURL(url, host){
-  return 'DIRECT';
+  return 'PROXY 127.0.0.1:8888';
 }

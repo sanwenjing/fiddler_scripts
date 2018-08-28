@@ -149,7 +149,9 @@ class Handlers
     }
 
     static function OnBeforeRequest(oSession: Session) {
-        wFile(null,"ACCESS:"+oSession.url);
+        //wFile(null,"ACCESS:"+oSession.url);
+        Log("ACCESS:"+oSession.url);
+		
         // Sample Rule: Color ASPX requests in RED
         // if (oSession.uriContains(".aspx")) {	oSession["ui-color"] = "red";	}
 
@@ -271,6 +273,7 @@ class Handlers
     }
     static function Log(logtext:String){
         FiddlerObject.log(logtext);
+		st(logtext);
     }
     static function Run(cmd:String) {
         var o = new ActiveXObject("WScript.Shell");
@@ -289,7 +292,10 @@ class Handlers
         f.writeLine(getTime()+" "+content);
         f.close();
     }
-    static function OnBeforeResponse(oSession: Session) {
+    static function st(status:String){//print msg on status.
+        FiddlerObject.StatusText=status;
+        }
+	static function OnBeforeResponse(oSession: Session) {
         if (m_Hide304s && oSession.responseCode == 304) {
             oSession["ui-hide"] = "true";
         }
@@ -350,8 +356,8 @@ class Handlers
 
     // The Main() function runs everytime your FiddlerScript compiles
     static function Main() {
-        var today: Date = new Date();
-        FiddlerObject.StatusText = " CustomRules.js was loaded at: " + today;
+        //var today: Date = new Date();
+        FiddlerObject.StatusText = " CustomRules.js was loaded at: " + getTime();
 
         // Uncomment to add a "Server" column containing the response "Server" header, if present
         // UI.lvSessions.AddBoundColumn("Server", 50, "@response.server");
@@ -496,3 +502,4 @@ class Handlers
         }
     }
 }
+
